@@ -1,6 +1,7 @@
 import pygame
 import time 
 import random
+import sys
 
 pygame.init()
 
@@ -118,10 +119,9 @@ def goti_number():
         dice = pygame.image.load("images/dice_image6.png")
     return (dice, diceroll)
     
-    
 # game loop
-def main():
-    turn = "blue"
+def main(turn):
+    # turn = "blue"
     game = True
     # goti first place
     rx,bx=370, 370
@@ -141,7 +141,8 @@ def main():
             
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                game = False
+                # game = False
+                sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if button.collidepoint(mouse_pos):
@@ -346,7 +347,8 @@ def main():
         blue_player(bx,by)
         pygame.display.update()
         time.sleep(1.3)
-win = main()
+turn = "blue"
+win = main(turn)
 if win == "Red":
     msg = font1.render("Red successfully crossed the hurdle",True, (255,0,0))
     screen.blit(msg,(409,50))
