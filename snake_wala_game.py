@@ -351,10 +351,11 @@ if win == "Red":
     msg = font1.render("Red successfully crossed the hurdle",True, (255,0,0))
     screen.blit(msg,(409,50))
     pygame.display.update()
+    time.sleep (10)
 else:
     msg = font1.render("Blue successfully crossed the hurdle",True, (255,0,0))
     screen.blit(msg,(409,50))
     pygame.display.update()
-time.sleep (10)
+    time.sleep (10)
 pygame.quit()
 quit()
