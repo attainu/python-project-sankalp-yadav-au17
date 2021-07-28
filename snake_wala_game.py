@@ -26,8 +26,7 @@ font2 = pygame.font.SysFont("comicsansms",25)
 red=pygame.image.load("images/red_c.png")
 blue=pygame.image.load("images/blue_c.png")
 # player name and dice
-rx,bx=370, 370
-ry,by=300, 450
+
 def red_player(rx,ry):
     msg1 = font1.render("Player 1",True,(255,0,0))
     screen.blit(msg1,(250,303))
@@ -93,6 +92,8 @@ def ladder(x,con1):
         return 42 , True
     elif x == 28:
         return 84 , True
+    elif x == 72:
+        return 91 , True
     elif x == 51:
         return 67 , True
     elif x == 80:
@@ -119,214 +120,243 @@ def goti_number():
     
     
 # game loop
-turn = "blue"
-game = True
-cnt1=None
-cnt2=None
-con1 = False
-con2 = False
-while game:
-    screen.fill((0,255,195))
-    bck()
+def main():
+    turn = "blue"
+    game = True
+    # goti first place
+    rx,bx=370, 370
+    ry,by=300, 450
+    cnt1=None
+    cnt2=None
+    con1 = False
+    con2 = False
+    while game:
+        screen.fill((0,255,195))
+        bck()
 
-    if turn == "red":
-        red_msg()
-    elif turn == "blue":
-        blue_msg()
-        
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            game = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-            if button.collidepoint(mouse_pos):
-                goti_number()
-                dice,diceroll = goti_number()
-                screen.blit(dice,(100,170))
-                print(diceroll)
-            # for changing the turn 
-            if goti_number() and turn == "red":
-                turn = "blue"
-                # for red goti
-                if diceroll == 1 and rx == 370 and ry ==300 and cnt1==None:
-                    rx = 300
-                    ry = 584
-                    cnt1=0
-                elif cnt1 != None and (cnt1 + diceroll) > 100:
-                    continue
-                elif cnt1 !=None and diceroll == 1 :
-                    cnt1 += diceroll
-                    lddr,condition1 = ladder(cnt1,con1)
-                    if condition1 == True:
-                        cnt1 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt1 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    rx = a[0]
-                    ry = a[1] 
-                elif cnt1 !=None and diceroll == 2:
-                    cnt1 += diceroll
-                    lddr,condition1 = ladder(cnt1,con1)
-                    if condition1 == True:
-                        cnt1 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt1 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    rx = a[0]
-                    ry = a[1]
-                elif cnt1 !=None and diceroll == 3:
-                    cnt1 += diceroll
-                    lddr,condition1 = ladder(cnt1,con1)
-                    if condition1 == True:
-                        cnt1 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt1 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    rx = a[0]
-                    ry = a[1]
-                elif cnt1 !=None and diceroll == 4:
-                    cnt1 += diceroll
-                    lddr,condition1 = ladder(cnt1,con1)
-                    if condition1 == True:
-                        cnt1 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt1 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    rx = a[0]
-                    ry = a[1]
-                elif cnt1 !=None and diceroll == 5:
-                    cnt1 += diceroll
-                    lddr,condition1 = ladder(cnt1,con1)
-                    if condition1 == True:
-                        cnt1 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt1 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    rx = a[0]
-                    ry = a[1]
-                elif cnt1 !=None and diceroll == 6:
-                    cnt1 += diceroll
-                    lddr,condition1 = ladder(cnt1,con1)
-                    if condition1 == True:
-                        cnt1 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt1 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    rx = a[0]
-                    ry = a[1]
-                
-            # for blue goti
-            elif goti_number() and turn == "blue":
-                turn = "red"
-                if diceroll == 1 and bx == 370 and by ==450 and cnt2==None:
-                    bx = 351
-                    by = 584
-                    cnt2=0
-                elif cnt2 != None and (cnt2 + diceroll) > 100 :
-                    continue
-                elif cnt2 !=None and diceroll == 1 :
-                    cnt2 += diceroll
-                    lddr,condition1 = ladder(cnt2,con1)
-                    if condition1 == True:
-                        cnt2 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt2 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    bx = a[0]
-                    by = a[1]
-                elif cnt2 !=None and diceroll == 2 :
-                    cnt2 += diceroll
-                    lddr,condition1 = ladder(cnt2,con1)
-                    if condition1 == True:
-                        cnt2 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt2 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    bx = a[0]
-                    by = a[1] 
-                elif cnt2 !=None and diceroll == 3 :
-                    cnt2 += diceroll
-                    lddr,condition1 = ladder(cnt2,con1)
-                    if condition1 == True:
-                        cnt2 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt2 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    bx = a[0]
-                    by = a[1]
-                elif cnt2 !=None and diceroll == 4 :
-                    cnt2 += diceroll
-                    lddr,condition1 = ladder(cnt2,con1)
-                    if condition1 == True:
-                        cnt2 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt2 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    bx = a[0]
-                    by = a[1]
-                elif cnt2 !=None and diceroll == 5 :
-                    cnt2 += diceroll
-                    lddr,condition1 = ladder(cnt2,con1)
-                    if condition1 == True:
-                        cnt2 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt2 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    bx = a[0]
-                    by = a[1]
-                elif cnt2 !=None and diceroll == 6 :
-                    cnt2 += diceroll
-                    lddr,condition1 = ladder(cnt2,con1)
-                    if condition1 == True:
-                        cnt2 = lddr
-                        con1,condition1 = False, False
-                    snk,condition2 = snake(lddr,con2)
-                    if condition2 == True:
-                        cnt2 = snk
-                        con2,condition2 = False, False
-                    a = board(snk-1)
-                    bx = a[0]
-                    by = a[1]
-                    
+        if turn == "red":
+            red_msg()
+        elif turn == "blue":
+            blue_msg()
             
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if button.collidepoint(mouse_pos):
+                    goti_number()
+                    dice,diceroll = goti_number()
+                    screen.blit(dice,(100,170))
+                    print(diceroll)
+                # for changing the turn 
+                if goti_number() and turn == "red":
+                    turn = "blue"
+                    # for red goti
+                    if diceroll == 1 and rx == 370 and ry ==300 and cnt1==None:
+                        rx = 300
+                        ry = 584
+                        cnt1=0
+                    elif cnt1 !=None and (cnt1 + diceroll) == 100:
+                        # screen.blit(msg,(409,50))
+                        cnt1 += diceroll
+                        a = board(cnt1 - 1)
+                        rx = a[0]
+                        ry = a[1]
+                        return "Red"
+                        
+                    elif cnt1 != None and (cnt1 + diceroll) > 100:
+                        continue
+                    elif cnt1 !=None and diceroll == 1 :
+                        cnt1 += diceroll
+                        lddr,condition1 = ladder(cnt1,con1)
+                        if condition1 == True:
+                            cnt1 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt1 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        rx = a[0]
+                        ry = a[1] 
+                    elif cnt1 !=None and diceroll == 2:
+                        cnt1 += diceroll
+                        lddr,condition1 = ladder(cnt1,con1)
+                        if condition1 == True:
+                            cnt1 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt1 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        rx = a[0]
+                        ry = a[1]
+                    elif cnt1 !=None and diceroll == 3:
+                        cnt1 += diceroll
+                        lddr,condition1 = ladder(cnt1,con1)
+                        if condition1 == True:
+                            cnt1 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt1 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        rx = a[0]
+                        ry = a[1]
+                    elif cnt1 !=None and diceroll == 4:
+                        cnt1 += diceroll
+                        lddr,condition1 = ladder(cnt1,con1)
+                        if condition1 == True:
+                            cnt1 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt1 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        rx = a[0]
+                        ry = a[1]
+                    elif cnt1 !=None and diceroll == 5:
+                        cnt1 += diceroll
+                        lddr,condition1 = ladder(cnt1,con1)
+                        if condition1 == True:
+                            cnt1 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt1 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        rx = a[0]
+                        ry = a[1]
+                    elif cnt1 !=None and diceroll == 6:
+                        cnt1 += diceroll
+                        lddr,condition1 = ladder(cnt1,con1)
+                        if condition1 == True:
+                            cnt1 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt1 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        rx = a[0]
+                        ry = a[1]
+                    
+                # for blue goti
+                elif goti_number() and turn == "blue":
+                    turn = "red"
+                    if diceroll == 1 and bx == 370 and by ==450 and cnt2==None:
+                        bx = 351
+                        by = 584
+                        cnt2=0
+                    elif cnt2 !=None and (cnt2 + diceroll) == 100:
+                        # screen.blit(msg,(409,50))
+                        cnt2 += diceroll
+                        a = board(cnt2 - 1)
+                        bx = a[0]
+                        by = a[1]
+                        return "Blue"
+                    elif cnt2 != None and (cnt2 + diceroll) > 100 :
+                        continue
+                    elif cnt2 !=None and diceroll == 1 :
+                        cnt2 += diceroll
+                        lddr,condition1 = ladder(cnt2,con1)
+                        if condition1 == True:
+                            cnt2 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt2 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        bx = a[0]
+                        by = a[1]
+                    elif cnt2 !=None and diceroll == 2 :
+                        cnt2 += diceroll
+                        lddr,condition1 = ladder(cnt2,con1)
+                        if condition1 == True:
+                            cnt2 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt2 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        bx = a[0]
+                        by = a[1] 
+                    elif cnt2 !=None and diceroll == 3 :
+                        cnt2 += diceroll
+                        lddr,condition1 = ladder(cnt2,con1)
+                        if condition1 == True:
+                            cnt2 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt2 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        bx = a[0]
+                        by = a[1]
+                    elif cnt2 !=None and diceroll == 4 :
+                        cnt2 += diceroll
+                        lddr,condition1 = ladder(cnt2,con1)
+                        if condition1 == True:
+                            cnt2 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt2 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        bx = a[0]
+                        by = a[1]
+                    elif cnt2 !=None and diceroll == 5 :
+                        cnt2 += diceroll
+                        lddr,condition1 = ladder(cnt2,con1)
+                        if condition1 == True:
+                            cnt2 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt2 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        bx = a[0]
+                        by = a[1]
+                    elif cnt2 !=None and diceroll == 6 :
+                        cnt2 += diceroll
+                        lddr,condition1 = ladder(cnt2,con1)
+                        if condition1 == True:
+                            cnt2 = lddr
+                            con1,condition1 = False, False
+                        snk,condition2 = snake(lddr,con2)
+                        if condition2 == True:
+                            cnt2 = snk
+                            con2,condition2 = False, False
+                        a = board(snk-1)
+                        bx = a[0]
+                        by = a[1]
+                        
+                
 
 
-    red_player(rx,ry)
-    blue_player(bx,by)
+        red_player(rx,ry)
+        blue_player(bx,by)
+        pygame.display.update()
+        time.sleep(1.3)
+win = main()
+if win == "Red":
+    msg = font1.render("Red successfully crossed the hurdle",True, (255,0,0))
+    screen.blit(msg,(409,50))
     pygame.display.update()
-    time.sleep(1.3)
+else:
+    msg = font1.render("Blue successfully crossed the hurdle",True, (255,0,0))
+    screen.blit(msg,(409,50))
+    pygame.display.update()
+time.sleep (10)
 pygame.quit()
 quit()
