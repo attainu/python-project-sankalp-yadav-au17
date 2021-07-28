@@ -158,7 +158,6 @@ def main():
                         ry = 584
                         cnt1=0
                     elif cnt1 !=None and (cnt1 + diceroll) == 100:
-                        # screen.blit(msg,(409,50))
                         cnt1 += diceroll
                         a = board(cnt1 - 1)
                         rx = a[0]
@@ -254,7 +253,6 @@ def main():
                         by = 584
                         cnt2=0
                     elif cnt2 !=None and (cnt2 + diceroll) == 100:
-                        # screen.blit(msg,(409,50))
                         cnt2 += diceroll
                         a = board(cnt2 - 1)
                         bx = a[0]
