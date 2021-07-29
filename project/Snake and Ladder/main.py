@@ -15,7 +15,7 @@ pygame.init()
 screen = pygame.display.set_mode((Size.width,Size.heigth))
 pygame.display.set_caption("Snake and Ladder Wala Game")
 
-# # background
+# background
 # snk_lddr_img=pygame.image.load("Snake and Ladder/Assets/images/Snakes_ladders_big_image.png")
 # bckimg=pygame.image.load("Snake and Ladder/Assets/images/introduction_image2.jpg")
 # playbutton = pygame.image.load("Snake and Ladder/Assets/images/playbutton.png")
@@ -26,7 +26,7 @@ pygame.display.set_caption("Snake and Ladder Wala Game")
 #     screen.blit(bckimg,(0,0))
 #     screen.blit(snk_lddr_img,(433,134))
 #     screen.blit(playbutton,(50,200))
-
+bg=Background()
 # players
 font1 = pygame.font.SysFont("comicsansms",30)
 font2 = pygame.font.SysFont("comicsansms",25)
@@ -66,7 +66,7 @@ def main(turn):
     con2 = False
     while game:
         screen.fill((0,255,195))
-        Background.bck()
+        bg.bck()
 
         if turn == "red":
             red_msg()
@@ -79,7 +79,7 @@ def main(turn):
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                if Background.button.collidepoint(mouse_pos):
+                if bg.button.collidepoint(mouse_pos):
                     Dice.goti_number()
                     dice,diceroll = Dice.goti_number()
                     screen.blit(dice,(100,170))
