@@ -20,7 +20,7 @@ pygame.display.set_caption("Snake and Ladder Wala Game")
 bg = Background()
 plyrs = Players()
 
-
+#
     
 # game loop
 def main(turn):
@@ -33,7 +33,9 @@ def main(turn):
     cnt2=None
     con1 = False
     con2 = False
+
     while game:
+        
         screen.fill((0,255,195))
         bg.bck()
 
@@ -258,9 +260,7 @@ if win == "Red":
     pygame.display.update()
     time.sleep (10)
 else:
-    msg = plyrs.font1.render("Blue successfully crossed the hurdle",True, (255,0,0))
+    msg = plyrs.font1.render("Blue successfully crossed the hurdle",True, (0,0,255))
     screen.blit(msg,(409,50))
     pygame.display.update()
     time.sleep (10)
-pygame.quit()
-quit()
