@@ -8,7 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((1366,768))
 pygame.display.set_caption("Snake and Ladder Wala Game")
 
-# background
+# backgroundd
 snk_lddr_img=pygame.image.load("images/Snakes_ladders_big_image.png")
 bckimg=pygame.image.load("images/introduction_image2.jpg")
 playbutton = pygame.image.load("images/playbutton.png")
