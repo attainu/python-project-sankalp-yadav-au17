@@ -1,10 +1,11 @@
 import pygame
+
+
 class Snake:
     # snake
-    def snakes(x,con2):
+    def snakes(x, con2):
         pygame.mixer.music.load("Snake and Ladder/Assets/sound/snake_sound.wav")
         snake_sound = pygame.mixer.Sound("Snake and Ladder/Assets/sound/snake_sound.wav")
-        
         if x == 17:
             snake_sound.play()
             return 7, True
