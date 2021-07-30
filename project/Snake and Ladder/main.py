@@ -20,11 +20,9 @@ pygame.display.set_caption("Snake and Ladder Wala Game")
 bg = Background()
 plyrs = Players()
 
-#
     
 # game loop
 def main(turn):
-    # turn = "blue"
     game = True
     # goti first place
     rx,bx=370, 370
@@ -35,7 +33,7 @@ def main(turn):
     con2 = False
 
     while game:
-        
+
         screen.fill((0,255,195))
         bg.bck()
 
@@ -252,15 +250,29 @@ def main(turn):
         plyrs.blue_player(bx,by)
         pygame.display.update()
         time.sleep(1.3)
+
 turn = "blue"
 win = main(turn)
+
+# game over sound
+pygame.mixer.music.load("Snake and Ladder/Assets/sound/game_over_sound.wav")
+game_over_sound = pygame.mixer.Sound("Snake and Ladder/Assets/sound/game_over_sound.wav")
+
 if win == "Red":
+    game_over_sound.play()
     msg = plyrs.font1.render("Red successfully crossed the hurdle",True, (255,0,0))
     screen.blit(msg,(409,50))
     pygame.display.update()
     time.sleep (10)
 else:
+    game_over_sound.play()
     msg = plyrs.font1.render("Blue successfully crossed the hurdle",True, (0,0,255))
     screen.blit(msg,(409,50))
     pygame.display.update()
     time.sleep (10)
+#  for event in pygame.event.get():    
+#     if event.type == pygame.QUIT:
+#         sys.exit()
+#     else:
+#         pygame.quit()
+#         quit()
