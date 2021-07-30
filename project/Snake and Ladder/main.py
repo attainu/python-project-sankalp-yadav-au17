@@ -1,6 +1,5 @@
 import pygame
 import time 
-import random
 import sys 
 from Entities.matrix import Board
 from Utilities.screen_size import Size
